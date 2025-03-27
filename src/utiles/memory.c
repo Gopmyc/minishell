@@ -17,8 +17,8 @@ t_mem_manager	*init_mem_manager(void)
 	t_mem_manager	*manager;
 
 	manager = (t_mem_manager *)malloc(sizeof(t_mem_manager));
-	if (!manager)
-		ft_error();
+	if (!(manager))
+		exit(1);
 	manager->head = NULL;
 	return (manager);
 }
@@ -28,13 +28,13 @@ void	*mem_alloc(t_mem_manager *manager, size_t size)
 	void		*ptr;
 	t_mem_node	*new_node;
 
-	if (!manager || size == 0)
+	if (!(manager) || size == 0)
 		return (NULL);
 	ptr = malloc(size);
 	if (!ptr)
 		return (NULL);
 	new_node = (t_mem_node *)malloc(sizeof(t_mem_node));
-	if (!new_node)
+	if (!(new_node))
 	{
 		free(ptr);
 		return (NULL);
@@ -50,7 +50,7 @@ void	free_all(t_mem_manager *manager)
 	t_mem_node	*current;
 	t_mem_node	*tmp;
 
-	if (!manager)
+	if (!(manager))
 		return ;
 	current = manager->head;
 	while (current)
@@ -65,8 +65,8 @@ void	free_all(t_mem_manager *manager)
 
 int	destroy_mem_manager(t_mem_manager *manager)
 {
-	if (!manager)
-		return (0);
+	if (!(manager))
+		return (1);
 	free_all(manager);
 	free(manager);
 	return (0);

@@ -6,12 +6,18 @@
 /*   By: ghoyaux <ghoyaux@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/24 09:07:19 by ghoyaux           #+#    #+#             */
-/*   Updated: 2025/03/24 09:54:03 by ghoyaux          ###   ########.fr       */
+/*   Updated: 2025/03/27 08:46:39 by ghoyaux          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
+
+/* --- BASE CONSTS --- */
+# ifndef PROMPT
+#  define PROMPT "Yes is a girou/minishell> "
+# endif
+/* ------------------ */
 
 /* --- BASE LIBS --- */
 # include <stdio.h>
@@ -30,6 +36,10 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/ioctl.h>
+/* ------------------ */
+
+/* --- CUSTOMS LIBS --- */
+// TODO : LIBFT, ect.
 /* ------------------ */
 
 /* --- STRUCT --- */
@@ -52,6 +62,11 @@ void			*mem_alloc(t_mem_manager *manager, size_t size);
 void			free_all(t_mem_manager *manager);
 int				destroy_mem_manager(t_mem_manager *manager);
 void			ft_free_tbl(char **array, size_t j);
+
+	/* Interactive(SIG) function(s) */
+void			handle_sigint(int sig);
+void			handle_sigquit(int sig);
+void			setup_signals(void);
 
 /* ------------------ */
 
