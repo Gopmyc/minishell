@@ -72,9 +72,19 @@ int	destroy_mem_manager(t_mem_manager *manager)
 	return (0);
 }
 
-void	ft_free_tbl(char **array, size_t j)
+void	*mem_realloc_copy(t_mem_manager *manager, void *ptr, size_t size)
 {
-	while (j > 0)
-		free(array[--j]);
-	free(array);
+	void	*new_ptr;
+
+	if (!manager || !ptr || size == 0)
+		return (NULL);
+	new_ptr = mem_alloc(manager, size);
+	if (!new_ptr)
+	{
+		free(ptr);
+		return (NULL);
+	}
+	ft_memcpy(new_ptr, ptr, size);
+	free(ptr);
+	return (new_ptr);
 }
